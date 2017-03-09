@@ -1,0 +1,18 @@
+<div class="w3-panel w3-red w3-padding w3-margin-bottom">
+    <span class="w3-closebtn">X</span>
+    <h6>{{#lead_passenger}}Lead {{/lead_passenger}}Passenger:</h6>
+</div>
+<form action="/admin/{{^booking_id}}index{{/booking_id}}{{#booking_id}}updatepassenger/{{booking_id}}{{/booking_id}}" method="POST" name="{{#lead_passenger}}lead{{/lead_passenger}}Passenger">
+    <input type="hidden" name="bookingId" value="{{#bookingInfo}}{{booking_id}}{{/bookingInfo}}">
+    {{^customer_id}}<label for="">Passenger</label><select name="exsitingPassgner"></select>{{/customer_id}}
+    <input type="hidden" name="customer_id" value="{{#customer_id}}{{customer_id}}{{/customer_id}}">
+    <label for="">Title</label><input type="text" name="title" value="{{title}}" maxlength="4" size="4">
+    <label for="">First Name</label><input type="text" name="firstName" value="{{first_name}}">
+    <label for="">Last Name</label><input type="text" name="lastName" value="{{last_name}}">
+    {{#age}}<label for="">Age</label><input type="text" name="age" value="{{age}}" maxlength="2" size="2">{{/age}}
+    <label for="">email</label><input type="text" name="emailAddress" value="{{email_address}}">
+    <label for="">Age</label><input type="text" name="age" value="{{age}}">
+    <input type="hidden" name="leadPassenger" value="{{#lead_passenger}}{{lead_passenger}}{{/lead_passenger}}{{^lead_passenger}}1{{/lead_passenger}}">
+    <input type="submit" value="{{#customer_id}}Update{{/customer_id}}{{^customer_id}}Create{{/customer_id}} Passenger">
+</form>
+

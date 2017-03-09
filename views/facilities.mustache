@@ -1,0 +1,96 @@
+{{>partials/header}}
+{{>partials/cover}}
+{{>partials/navigation}}
+<div class="w3-row">
+    <section class="w3-col l9 m7 w3-padding">
+        <div class="w3-border w3-round-xlarge w3-padding">
+            <header>About</header>
+            <article>
+                <p>Situated in a quiet area of park, no walk through to other caravans and only a 3-4 minute walk from the main show bar, 47 Meadows is in a prime spot for a relaxing holiday but near enough to main complex to enjoy all the amenities.</p>
+                <dl>
+                    <dd><span>Category:</span> Holiday Rental @ Littlesea Caravan Park</dd>
+                    <dd><span>Name:</span> Paul and Claire's Holiday Home</dd>
+                    <dd><span>Address:</span> Lynch Lane, Littlesea, DT49DT Weymouth, Dorset</dd>
+                    <dd><span>Hours:</span> Always open</dd>
+                    <dd><span>Price Range:</span> &pound;120.00 to &pound700.00</dd>
+                    <dd><span>Parking:</span> Outside Parking for Caravan for 2 to 3 vehicles, plus car park near the main complex</dd>
+                    <dd><span>Public Transit:</span> Public Transport (Bus) from Weymouth Town Centre to Littlesea Haven Caravan Park</dd>
+                </dl>
+            </article>
+
+            <div id="anchor" class="w3-hide-small">
+
+                <header>Caravan Facilities</header>
+                <article>
+                    <dl>
+                        <dd>Toilet x 2</dd>
+                        <dd>Shower</dd>
+                        <dd>Central Heating</dd>
+                        <dd>Fridge Freezer</dd>
+                        <dd>Microwave</dd>
+                        <dd>Toaster</dd>
+                        <dd>42" DVD Television</dd>
+                        <dd>Double Glazing</dd>
+                        <dd>Parking x 3</dd>
+                        <dd>3 Bedrooms (can accommodate a travel cot)</dd>
+                        <dd>Duvets and Pillows to accommodate 4 beds (4 x single, 2 x double)<dd>
+                        <dd>USB Plug Sockets</dd>
+                        <dd>Electric Fire</dd>
+                        <dd>Kitcehn Facilities, knives, forks, plates etc</dd>
+                    </dl>
+                </article>
+                
+                <header>Site Facilities</header>
+                <article>
+                    <dl>
+                        <dd>Accept children all ages</dd>
+                        <dd>Children's play area</dd>
+                        <dd>Daily Activities for chldren of all ages - see notice board on site or download the Haven app</dd>
+                        <dd>Games Room/Large Arcade Area</dd>
+                        <dd>Small Soft Play Area</dd>
+                        <dd>Indoor pool</dd>
+                        <dd>Outdoor pool</dd>
+                        <dd>Tennis court</dd>
+                        <dd>5 a-side Football/Basket Ball Court</dd>
+                        <dd>Bar</dd>
+                        <dd>Show Room</dd>
+                        <dd>Convenience Store</dd>
+                        <dd>Restaurant</dd>
+                        <dd>Pizza (including Delivery if requied)</dd>
+                    </dl>
+                </article>
+            </div>
+            <div class="w3-hide-large">
+                <p><a class="w3-btn-block readmore" href="javascript:void(0);">Read more</a></p>
+            </div>
+        </div>
+        <article class="w3-padding-16">
+            <div class="w3-border w3-round-xlarge w3-padding">
+            <div id="map"></div>
+            <script>
+            function initMap() {
+                var myLatLng = {lat: 50.606003, lng: -2.492000};
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: myLatLng
+                });
+
+                var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: '47 Meadows'
+                });
+            }
+            </script>
+            <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9Xg9XnXOUac1r8gYLaZlYUDPVS80iEY4&callback=initMap">
+            </script>
+            </div>
+        </article>
+    </section>
+    <section class="w3-col l3 m5 w3-center">
+        <div class="fb-page" data-href="https://www.facebook.com/paulandclairesholidayhome/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><blockquote cite="https://www.facebook.com/paulandclairesholidayhome/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/paulandclairesholidayhome/">Paul and Claire&#039;s Holiday Home</a></blockquote></div>
+    </section>
+</div>
+{{>partials/footer}}

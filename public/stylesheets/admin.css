@@ -1,0 +1,30 @@
+.w3-panel {
+    background-color:grey;
+}
+label {
+    margin-right: 10px;
+    display: inline-block;
+    width: auto;
+}
+input[type='submit'] {
+    clear:both;
+    display:block;
+    margin:15px 0px 0px 0px;
+}
+.inputSpace {
+    clear:both;
+}
+.inputSpace label {
+    width:150px;
+}
+.margin2pxTopBottom {
+    margin: 2px 0px;
+}
+.sameLine {
+    display:inline-block;
+    float: left;
+    overflow:auto;
+}
+.minHeight30px {
+    min-height:32px
+}

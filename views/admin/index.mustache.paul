@@ -1,0 +1,156 @@
+{{>partials/header}}
+{{>partials/fbsdk}}
+{{>partials/cover}}
+{{>partials/navigation}}
+<div class="w3-row">
+    <section class="w3-col l9 m7 w3-padding">
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Booking ID:</h3>
+        </div>
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Booking Information:</h3>
+            <form action="/admin/index" method="POST" name="bookingInformation">
+                <label for="">Arrival Date</label><input type="text" name="bookings|arrival_date">
+                <label for="">Duration</label><input type="text" name="bookings|no_of_nights">
+                <label for="">Cost</label><input type="text" name="bookings|cost">i
+                <input type="submit">
+            </form>
+        </div>
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Passenger Information:</h3>
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Lead Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="leadPassenger">
+                <label for="">Title</label><input type="text" name="title1" value="">
+                <label for="">First Name</label><input type="text" name="firstName1" value="">
+                <label for="">Last Name</label><input type="text" name="lastName1" value="">
+                <label for="">Age</label><input type="text" name="age1" value="">
+                <label for="">email</label><input type="text" name="emailAaddress1" value="1">
+                <input type="hidden" name="leadPassenger" value="1">
+                <input type="submit">
+            </form>
+
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="passenger2">
+                <label for="">Title</label><input type="text" name="title2" value="">
+                <label for="">First Name</label><input type="text" name="firstName2" value="">
+                <label for="">Last Name</label><input type="text" name="lastName2" value="">
+                <label for="">Age</label><input type="text" name="age2" value="">
+                <input type="hidden" name="leadPassenger2" value="0">
+                <input type="submit">
+            </form>
+
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="passenger3">
+                <label for="">Title</label><input type="text" name="title3" value="">
+                <label for="">First Name</label><input type="text" name="firstName3" value="">
+                <label for="">Last Name</label><input type="text" name="lastName3" value="">
+                <label for="">Age</label><input type="text" name="age3" value="">
+                <input type="hidden" name="leadPassenger3" value="0">
+                <input type="submit">
+            </form>
+
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="passenger4">
+                <label for="">Title</label><input type="text" name="title4" value="">
+                <label for="">First Name</label><input type="text" name="firstName4" value="">
+                <label for="">Last Name</label><input type="text" name="lastName4" value="">
+                <label for="">Age</label><input type="text" name="age4" value="">
+                <input type="hidden" name="leadPassenger4" value="0">
+                <input type="submit">
+            </form>
+
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="passenger5">
+                <label for="">Title</label><input type="text" name="title5" value="">
+                <label for="">First Name</label><input type="text" name="firstName5" value="">
+                <label for="">Last Name</label><input type="text" name="lastName5" value="">
+                <label for="">Age</label><input type="text" name="age5" value="">
+                <input type="hidden" name="leadPassenger5" value="0">
+                <input type="submit">
+            </form>
+
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="passenger6">
+                <label for="">Title</label><input type="text" name="title6" value="">
+                <label for="">First Name</label><input type="text" name="firstName6" value="">
+                <label for="">Last Name</label><input type="text" name="lastName6" value="">
+                <label for="">Age</label><input type="text" name="age6" value="">
+                <input type="hidden" name="leadPassenger6" value="0">
+                <input type="submit">
+            </form>
+
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="passenger7">
+                <label for="">Title</label><input type="text" name="title7" value="">
+                <label for="">First Name</label><input type="text" name="firstName7" value="">
+                <label for="">Last Name</label><input type="text" name="lastName7" value="">
+                <label for="">Age</label><input type="text" name="age7" value="">
+                <input type="hidden" name="leadPassenger7" value="0">
+                <input type="submit">
+            </form>
+
+            <div class="w3-panel w3-red w3-padding">
+                <span class="w3-closebtn">X</span>
+                <h6>Passenger:</h6>
+            </div>
+            <form action="/admin/index" method="POST" name="passenger8">
+                <label for="">Title</label><input type="text" name="title8" value="">
+                <label for="">First Name</label><input type="text" name="firstName8" value="">
+                <label for="">Last Name</label><input type="text" name="lastName8" value="">
+                <label for="">Age</label><input type="text" name="age8" value="">
+                <input type="hidden" name="leadPassenger8" value="0">
+                <input type="submit">
+            </form>
+
+        </div>
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Booking Address:</h3>
+            <form action="/admin/index" method="POST" name="bookingAddress">
+                <label for="">Address Type</label><input type="text" name="address_type" value="B">
+                <label for="">Address1</label><input type="text" name="address_1">
+                <label for="">Address2</label><input type="text name="address_2"">
+                <label for="">Address3</label><input type="text" name="address_3">
+                <label for="">Address4</label><input type="text" name="address_4">
+                <label for="">Post Code</label><input type="text" name="postal_code">
+                <label for="">Phone</label><input type="text" name="phone">
+            </form>
+        </div>
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Payment Information:</h3>
+            <form action="/admin/index" method="POST" name="paymentInformation1">
+                <label for="">Type</label><input type="text" name="paymentType">
+                <label for="">Amount</label><input type="text" name="paymentAmount">
+                <label for="">Reference</label><input type="text" name="paymentReference">
+                <label for="">Date</label><input type="text" name="paymentDate">
+            </form>
+        </div>
+    </section>
+    <section class="w3-col l3 m5 w3-center">
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Booking Summary:</h3>
+        </div>
+    </section>
+
+</div>
+{{>partials/footer}}

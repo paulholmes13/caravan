@@ -1,0 +1,90 @@
+{{>partials/headerAdmin}}
+{{>partials/fbsdk}}
+{{>partials/cover}}
+{{>partials/navigation}}
+{{#data}}
+<div class="w3-row">
+    <section class="w3-col l9 m7 w3-padding">
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Booking Information:</h3>
+            <form action="/admin/{{^bookingInfo}}createbooking/{{/bookingInfo}}{{#bookingInfo}}updatebooking/{{booking_id}}{{/bookingInfo}}" method="POST" name="bookingInformation">
+                {{#bookingInfo}}
+                    <input type="hidden" name="bookingId" value="{{booking_id}}">
+                    <label for="">Arrival Date</label><input type="text" name="arrivalDate" value="{{arrival_date}}">
+                    <label for="">Duration</label><input type="text" name="numberOfNights" value="{{no_of_nights}}">
+                    <label for="">Cost</label><input type="text" name="cost" value="{{cost}}">
+                    <label for="">Privillege Pass</label><input type="text" name="privPass" value="{{priv_pass}}">
+                    <input type="submit" value="{{#booking_id}}Update{{/booking_id}}{{^booking_id}}Create{{/booking_id}} Booking">
+                {{/bookingInfo}}
+                {{^bookingInfo}}
+                    <input type="hidden" name="bookingId" value="{{booking_id}}">
+                    <label for="">Arrival Date</label><input type="text" name="arrivalDate" value="{{arrival_date}}">
+                    <label for="">Duration</label><input type="text" name="numberOfNights" value="{{no_of_nights}}">
+                    <label for="">Cost</label><input type="text" name="cost" value="{{cost}}">
+                    <label for="">Privillege Pass</label><input type="text" name="privPass" value="{{priv_pass}}">
+                    <input type="submit" value="{{#booking_id}}Update{{/booking_id}}{{^booking_id}}Create{{/booking_id}} Booking">
+                {{/bookingInfo}}
+            </form>
+        </div>
+        {{#bookingInfo}}
+            <div class="w3-panel w3-border w3-round-xlarge w3-padding w3-margin-top">
+                <h3>Passenger Information:</h3>
+                {{#passengerInfo}}
+                    {{>partials/passenger}}
+                {{/passengerInfo}}
+                {{^passengerInfo}}
+                    {{>partials/passenger}}
+                {{/passengerInfo}}
+            </div>
+            <div class="w3-panel w3-border w3-round-xlarge w3-padding w3-margin-top">
+                <h3>Booking Address:</h3>
+                <form action="/admin/index" method="POST" name="bookingAddress">
+                    {{#addressInfo}}
+                        <input type="hidden" name="bookingId" value="{{#bookingInfo}}{{booking_id}}{{/bookingInfo}}">
+                        <input type="hidden" name="addressId" value="{{address_id}}">
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address Type</label><input type="text" name="address_type" value="B"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address1</label><input type="text" name="address_1" value="{{address_1}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address2</label><input type="text name="address_2" value="{{address_2}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address3</label><input type="text" name="address_3" value="{{address_3}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address4</label><input type="text" name="address_4" value="{{address_4}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Post Code</label><input type="text" name="postal_code" value="{{postal_code}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Phone</label><input type="text" name="phone" value="{{phone}}"></div>
+                        <input type="submit" value="{{#address_id}}Update{{/address_id}}{{^address_id}}Add{{/address_id}} Address">
+                    {{/addressInfo}}
+                    {{^addressInfo}}
+                        <input type="hidden" name="bookingId" value="{{#bookingInfo}}{{booking_id}}{{/bookingInfo}}">
+                        <input type="hidden" name="addressId" value="{{address_id}}">
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address Type</label><input type="text" name="address_type" value="B"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address1</label><input type="text" name="address_1" value="{{address_1}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address2</label><input type="text name="address_2" value="{{address_2}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address3</label><input type="text" name="address_3" value="{{address_3}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address4</label><input type="text" name="address_4" value="{{address_4}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Post Code</label><input type="text" name="postal_code" value="{{postal_code}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Phone</label><input type="text" name="phone" value="{{phone}}"></div>
+                        <input type="submit" value="{{#address_id}}Update{{/address_id}}{{^address_id}}Add{{/address_id}} Address">
+                    {{/addressInfo}}
+                </form>
+            </div>
+            <div class="w3-panel w3-border w3-round-xlarge w3-padding w3-margin-top">
+                <h3>Payment Information:</h3>
+                <form action="/admin/index" method="POST" name="paymentInformation1">
+                    {{#paymentInfo}}
+                        {{>partials/payment}}
+                    {{/paymentInfo}}
+                    {{^paymentInfo}}
+                        {{>partials/payment}}
+                    {{/paymentInfo}}
+                    <input type="submit" value="Add Payment">
+                </form>
+            </div>
+        {{/bookingInfo}}
+    </section>
+    <section class="w3-col l3 m5 w3-center w3-padding">
+        <div class="w3-panel w3-border w3-round-xlarge w3-padding">
+            <h3>Booking Summary:</h3>
+        </div>
+    </section>
+
+</div>
+{{/data}}
+{{>partials/footer}}
