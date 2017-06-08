@@ -1,0 +1,136 @@
+{{#data}}
+{{^bookingInfo}}
+<h1>No Booking Found</h1>
+{{/bookingInfo}}
+{{#bookingInfo}}
+{{>partials/headerAdmin}}
+<body class="test">
+
+    <div class="w3-container">
+
+        <div class="header_img">
+            <img class="overlay" src="/images/delta_lounge.jpeg" />
+            <p><a href="https://www.facebook.com/paulandclairesholidayhome/">https://www.facebook.com/paulandclairesholidayhome/</a></p>
+        </div>
+
+        <div class="title">
+            <h1 class="wording">Booking Confirmation - Reference: DELTA {{#bookingInfo}}{{booking_id}}{{/bookingInfo}} </h1>
+            <div class="vanaddress">
+            <p>
+            47 Meadows <br/>
+            Haven Holiday Park<br/>
+            LittleSea<br/>
+            DT4 9DT
+            </p>
+            <p><a href="tel:07787684268">Tel: 07787 684268</a></p>
+        </div>
+    </div>
+
+    <hr />
+
+    <p>Thank you for your recent payment, please find an updated document for your reference.</p>
+
+    <hr />
+
+    <div class="address">
+        <h3>About You</h3>
+        {{#addressInfo}}
+            <p>
+                {{#address_1}}{{address_1}}<br />{{/address_1}}
+                {{#address_2}}{{address_2}}<br />{{/address_2}}
+                {{#address_3}}{{address_3}}<br />{{/address_3}}
+                {{#address_4}}{{address_4}}<br />{{/address_4}}
+                {{#postal_code}}{{postal_code}}{{/postal_code}}
+            </p>
+            {{#phone}}<p>Tel: {{phone}}</p>{{/phone}}
+        {{/addressInfo}}
+        <p>Email: {{#passengerInfo}}{{#email_address}}{{email_address}}{{/email_address}}{{/passengerInfo}}</p>
+    </div>
+
+    <div>
+        <h3>People Staying</h3>
+        {{#passengerInfo}}
+        <p>{{#title}}{{title}}{{/title}} {{first_name}} {{last_name}} {{#age}}- {{age}}{{/age}}</p>
+        {{/passengerInfo}}
+    </div>
+
+    <hr />
+
+    <div class="info">
+        <h3>Accommodation</h3>
+        <p>
+            1 x Deluxe Delta Warmth 2016 - 3 Bed - Self Catering -  Arriving on {{#bookingInfo}}{{arrival_date_display}}{{/bookingInfo}} for {{#bookingInfo}}{{no_of_nights}}{{/bookingInfo}} nights.
+        </p>
+        <p>
+            Total Cost: &pound;{{#bookingInfo}}{{cost}}{{/bookingInfo}}
+        </p>
+    </div>
+
+    <hr />
+
+    <div class="payments">
+        <h3>Payments</h3>
+        {{#paymentInfo}}
+            {{#amount}}<span class='small'>{{payment_date}}</span><span class='small'>Type: {{type}}</span><span class='medium'>Amount: &pound;{{amount}}</span><span>Ref: {{reference}}</span><span>Balance: &pound;{{balance}}</span></br >{{/amount}}
+            {{^amount}}
+                <p>Please could you let us have the deposit in the sum of £75.00 as soon as possible.</p>
+            {{/amount}}
+            <p>
+            BACS Information:<br />
+            Account Name: Mr P and Mrs C Holmes<br />
+            Account Number: 00823812<br />
+            Account Sort Code: 110717<br />
+            </p>
+        {{/paymentInfo}}
+    </div>
+
+    <hr />
+
+    <div class="conditions">
+        <h4>Conditions</h4>
+        <p>
+            A deposit of &pound;75 is required.<br />
+            The deposit will be refunded according to the cancellation conditions.<br />
+            Full booking balance must be paid 14 days before arrival.<br />
+            Payments by cash or BACS<br />
+            Your expected arrival time is 15:00.<br />
+        </p>
+    </div>
+
+    <div class="cancellation">
+        <h4>Cancellations</h4>
+        <p>
+        If the booking is cancelled then a charge equal to &pound;75 per booking will be made.<br />
+        In the event of a no show or booking reduction (after arrival date) the full cost of the booking is charged.<br />
+        </p>
+    </div>
+
+    <hr />
+
+    <div class="cleaning">
+        <p>
+        Firstly, we would like to wish you a happy holiday and we hope you enjoy the park and caravan alike.
+
+        As this caravan is PRIVATELY owned please:
+
+        1) Leave the caravan as you first find it.  Prior to your stay the caravan has been thoroughly cleaned. Please check the caravan when you arrive and report any issues immediately taking photos if necessary.
+
+        2) We have supplied a number of cleaning products.  Please use them if needed and please replace should you use the last of an item.  There is a grocery store located by the main complex.
+        
+        3) Prior to leaving the caravan please ensure that all kitchen equipment is clean and back in place, ensuring that all kitchen surfaces and caravan tables have been wiped clean, bins have been emptied and the floors have been hoovered and left tidy.
+
+        4) The caravan should be left in the state you found it.  Any additional cleaning by Haven will impose further costs to us and we won’t be able to keep our prices at what we think are a reasonable rate.
+
+        5) Please do not remove any property from the caravan.  This is our property NOT Havens.  Please report any breakages, we understand accidents happen.
+
+        6) All doors and windows must be closed when you leave the caravan. 
+
+        7) This is a strictly no smoking caravan.
+
+        The cleaners will take photographs of anything they find.</p>
+        <p>Many thanks.</p>
+        <p>Paul and Claire</p>
+    </div>
+{{/bookingInfo}}
+{{/data}}
+

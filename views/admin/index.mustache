@@ -38,13 +38,15 @@
             </div>
             <div class="w3-panel w3-border w3-round-xlarge w3-padding w3-margin-top">
                 <h3>Booking Address:</h3>
-                <form action="/admin/index" method="POST" name="bookingAddress">
+                <form action="/admin/{{^addressInfo}}createaddress/{{/addressInfo}}{{#addressInfo}}{{#address_id}}updateaddress/{{address_id}}{{/address_id}}{{/addressInfo}}" method="POST" name="bookingAddress">
                     {{#addressInfo}}
                         <input type="hidden" name="bookingId" value="{{#bookingInfo}}{{booking_id}}{{/bookingInfo}}">
                         <input type="hidden" name="addressId" value="{{address_id}}">
+                        <input type="hidden" name="customerId" value="{{#passengerInfo}}{{customer_id}}{{/passengerInfo}}">
+                        
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address Type</label><input type="text" name="address_type" value="B"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address1</label><input type="text" name="address_1" value="{{address_1}}"></div>
-                        <div class="inputSpace margin2pxTopBottom"><label for="">Address2</label><input type="text name="address_2" value="{{address_2}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address2</label><input type="text" name="address_2" value="{{address_2}}"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address3</label><input type="text" name="address_3" value="{{address_3}}"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address4</label><input type="text" name="address_4" value="{{address_4}}"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Post Code</label><input type="text" name="postal_code" value="{{postal_code}}"></div>
@@ -54,9 +56,11 @@
                     {{^addressInfo}}
                         <input type="hidden" name="bookingId" value="{{#bookingInfo}}{{booking_id}}{{/bookingInfo}}">
                         <input type="hidden" name="addressId" value="{{address_id}}">
+                        <input type="hidden" name="customerId" value="{{#passengerInfo}}{{customer_id}}{{/passengerInfo}}">
+                        
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address Type</label><input type="text" name="address_type" value="B"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address1</label><input type="text" name="address_1" value="{{address_1}}"></div>
-                        <div class="inputSpace margin2pxTopBottom"><label for="">Address2</label><input type="text name="address_2" value="{{address_2}}"></div>
+                        <div class="inputSpace margin2pxTopBottom"><label for="">Address2</label><input type="text" name="address_2" value="{{address_2}}"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address3</label><input type="text" name="address_3" value="{{address_3}}"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address4</label><input type="text" name="address_4" value="{{address_4}}"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Post Code</label><input type="text" name="postal_code" value="{{postal_code}}"></div>
@@ -67,7 +71,7 @@
             </div>
             <div class="w3-panel w3-border w3-round-xlarge w3-padding w3-margin-top">
                 <h3>Payment Information:</h3>
-                <form action="/admin/index" method="POST" name="paymentInformation1">
+                <form action="/admin/{{^paymentInfo}}createpayment/{{/paymentInfo}}{{#paymentInfo}}{{#payment_id}}updatepayment/{{payment_id}}{{/payment_id}}{{/paymentInfo}}" method="POST" name="paymentInformation1">
                     {{#paymentInfo}}
                         {{>partials/payment}}
                     {{/paymentInfo}}

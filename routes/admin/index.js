@@ -8,102 +8,110 @@ router.use(bodyParser.urlencoded({
         extended: true
 }));
 
-router.use(function(req, res, next) {
-    db.connect({type:'select', action:'SELECT * FROM availability' }, function(result) {
-        if (typeof result != 'undefined' && result.length) {
-            var dataSet = [];
-            var dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            var dayNameAbbr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri","Sat"];
-            var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-            var oldMonth;
-            var firstDayInMonth = 0;
-            var lastDayInMonth;
-
-            for (var i=0; i<result.length; i++) {
-
-                if ( oldMonth != monthNames[result[i]["arrival_date"].getMonth()] ) {
-                    oldMonth = monthNames[result[i]["arrival_date"].getMonth()];
-                    firstDayInMonth = 1;
-                    lastDayInMonth = new Date(result[i]["arrival_date"].getFullYear(), result[i]["arrival_date"].getMonth() + 1, 0).getDate();
-                }
-                else {
-                    firstDayInMonth = 0;
-                }
-
-                var tempVariable = {
-                    year: result[i]["arrival_date"].getFullYear(),
-                    month: monthNames[result[i]["arrival_date"].getMonth()],
-                    dayName: dayNameAbbr[result[i]["arrival_date"].getDay()],
-                    day: result[i]["arrival_date"].getDate(),
-                    available: (result[i].status == '') ? 1:0,
-                    pending:(result[i].status == 'P') ? 1:0, 
-                    booked: (result[i].status == 'B') ? 1:0,
-                    closed: (result[i].status == 'C') ? 1:0,
-                    firstDayInMonth: firstDayInMonth,
-                    lastDayInMonth: (result[i]["arrival_date"].getDate() == lastDayInMonth) ? 1:0
-                };
-                dataSet.push(tempVariable);
-            }
-            
-            req.dataSet = dataSet;
-        }
-    next();
+router.use('/', function(req, res, next) {
+    booking.getAvailability({args:''}, function(result){
+        req.dataSet = result;
+        next();
     });
 });
 
+router.use('/menu/', function(req, res, next) {
+    next();
+});
+
 router.use('/index/:id', function(req, res, next) {
-    console.log(req.params.id);
     if (req.params.id) {
         booking.getBooking({bookingId:req.params.id}, function(result) {
-            req.bookingInfo = result;
-            
-            booking.getPassengers({bookingId:req.params.id}, function(result) {
-                req.passengerInfo = result;
+            if ( result && result.length ) {
+                var d = new Date(result[0]['arrival_date']);
+                var leadP = result[0]['lead_passenger_id'];
+                result[0]['arrival_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
 
-                booking.getPayments({bookingId:req.params.id}, function(result) {
-                    req.paymentInfo = result;
+                req.bookingInfo = result;
                 
-                    booking.getAddress({bookingId:req.params.id}, function(result) {
-                        req.addressInfo = result;
-                        next();
+                booking.getAllPassengers({bookingId:req.params.id}, function(result) {
+                    req.passengerAllInfo = result;
+
+                    booking.getPassengers({bookingId:req.params.id}, function(result) {
+                        req.passengerInfo = result[0];
+
+                        booking.getPayments({bookingId:req.params.id}, function(result) {
+                            if ( result && result.length ) {
+                                var d = new Date(result[0]['payment_date']);
+                                result[0]['payment_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
+                            }
+
+                            req.paymentInfo = result;
+                            
+                            booking.getAddress({customerId:leadP}, function(result) {
+                                req.addressInfo = result;
+                                next();
+                            });
+                        });
                     });
                 });
-            });
+            }
+            req.bookingInfo = {};
+            req.passengerAllInfo = {};
+            req.passengerInfo = {};
+            req.paymentInfo = {};
+            req.addressInfo = {};
+            next();
         });
     }
+});
+
+router.use('/createbooking/', function(req, res, next) {
+    var bookingId = null;
+    var params = [req.body.arrivalDate, req.body.numberOfNights, req.body.cost, req.body.privPass, bookingId];
+
+    booking.setBooking({inParams:params}, function(result) {
+        req.bookingId = result[2][0]['@out_param'];
+        next(); 
+    });
 });
 
 router.use('/updatebooking/:id', function(req, res, next) {
     if (req.params.id) {
-        var date = new Date(req.body.arrivalDate);
-        var dateString = '"'+ date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()+'"';
-        var sQuery = "UPDATE bookings SET arrival_date="+dateString+", no_of_nights="+req.body.numberOfNights+", cost="+req.body.cost+" WHERE booking_id="+req.params.id;
-
-        db.connect({type:'update', action: sQuery}, function(result) {
-            console.log(result);
-            next();
+        var params = [req.body.arrivalDate, req.body.numberOfNights, req.body.cost, req.body.privPass, req.body.bookingId];
+        booking.setBooking({inParams:params}, function(result) {
+            next(); 
         });
     }
 });
 
-router.use('/updatepayment/:id', function(req, res, next) {
-    if (req.params.id) {
-        console.log('Shouldnt be here.  OO errr');
+router.use('/createguest/', function(req, res, next) {
+    var age = (typeof req.body.age === 'undefined' || req.body.age == '' ) ? 0 : req.body.age;
+    var existingId = (typeof req.body.existingCustomerId === 'undefined' || req.body.existingCustomerId == '') ? null : req.body.existingCustomerId;
+    var params = [req.body.bookingId, existingId, null, req.body.title, req.body.firstName, req.body.lastName, req.body.emailAddress, age, req.body.leadPassenger];
+    booking.setGuest({inParams:params}, function(result) {
+        req.bookingId = req.body.bookingId;
+        next(); 
+    });
+});
+
+router.use('/updateguest/:id', function(req, res, next) {
+    if (req.body.bookingId) {
+        var age = (typeof req.body.age === 'undefined' || req.body.age == '' ) ? 0 : req.body.age;
+        var existingId = (typeof req.body.existingCustomerId === 'undefined' || req.body.existingCustomerId == '') ? null : req.body.existingCustomerId;
+        var params = [req.body.bookingId, existingId, req.body.customer_id, req.body.title, req.body.firstName, req.body.lastName, req.body.emailAddress, age, req.body.leadPassenger];
+        booking.setGuest({inParams:params}, function(result) {
+            next(); 
+        });
+    }
+});
+
+router.use('/createaddress/', function(req, res, next) {
+    var customerId = (typeof req.body.customerId == undefined) ? 0 : req.body.customerId;
+    var addressId = (typeof req.body.addressId == undefined || req.body.addressId == '') ? null : req.body.addressId;
+    var inParams = [addressId, customerId, req.body.address_type, req.body.address_1, req.body.address_2, req.body.address_3, req.body.address_4, req.body.postal_code, req.body.phone];
+
+    db.connect({type:'proc', action:'create_address', params:inParams}, function(result) {
+        req.bookingId = req.body.bookingId;
         next();
-    }
+    });
 });
 
-router.use('/updatepassenger/:id', function(req, res, next) {
-    if (req.params.id) {
-        console.log(req.body);
-        var sQuery = "UPDATE customer SET first_name='"+req.body.firstName+"', last_name='"+req.body.lastName+"', title='"+req.body.title+"', email_address='"+req.body.emailAddress+"', age="+req.body.age+", lead_passenger="+req.body.leadPassenger+" WHERE customer_id="+req.body.customer_id;
-        console.log(sQuery);
-        db.connect({type:'update', action: sQuery}, function(result) {
-            console.log(result);
-            next();
-        });
-    }
-});
 
 router.use('/updateaddress/:id', function(req, res, next) {
     if (req.params.id) {
@@ -112,28 +120,38 @@ router.use('/updateaddress/:id', function(req, res, next) {
     }
 });
 
-router.use('/createbooking/', function(req, res, next) {
-    var date = new Date(req.body.arrivalDate);
-    var today = new Date();
-    var dateString = '"'+ date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()+'"';
-    var todayDateString = '"'+ today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate()+'"';
-    var sQuery = "INSERT INTO bookings VALUES (null, "+dateString+", "+req.body.numberOfNights+", "+todayDateString+", "+todayDateString+", "+req.body.cost+", '', '"+req.body.privPass+"');";
-    console.log(sQuery);
+router.use('/updatepayment/:id', function(req, res, next) {
+    var paymentId = (typeof req.body.paymentId == undefined || req.body.paymentId == '') ? null : req.body.paymentId;
+    var inParams = [req.body.bookingId, paymentId, req.body.paymentType, req.body.paymentAmount, req.body.paymentReference, req.body.paymentDate];
 
-    db.connect({type:'insert', action: sQuery}, function(result) {
-        console.log(result.insertId);
-        req.bookingId = result.insertId;
+    db.connect({type:'proc', action:'create_payment', params:inParams}, function(result) {
+        req.bookingId = req.body.bookingId;
         next();
     });
 });
 
 
 
+
+router.use('/createpayment/', function(req, res, next) {
+    var paymentId = (typeof req.body.paymentId == undefined || req.body.paymentId == '') ? null : req.body.paymentId;
+    var inParams = [req.body.bookingId, paymentId, req.body.paymentType, req.body.paymentAmount, req.body.paymentReference, req.body.paymentDate];
+
+    db.connect({type:'proc', action:'create_payment', params:inParams}, function(result) {
+        req.bookingId = req.body.bookingId;
+        next();
+    });
+});
+
 /*********ROUTES BELOW*************************/
 
 /* availability page */
 router.get('/', function(req, res) {
-        res.render('admin/availability', {data: req.dataSet});
+    res.render('admin/availability', {data: req.dataSet});
+});
+
+router.get('/menu/', function(req, res) {
+    res.render('admin/menu', {});
 });
 
 router.get('/index/', function(req, res, next) {
@@ -142,7 +160,7 @@ router.get('/index/', function(req, res, next) {
 
 /* GET home page. */
 router.get('/index/:id', function(req, res, next) {
-    res.render('admin/index', { data:[{bookingInfo:req.bookingInfo, passengerInfo:req.passengerInfo, addressInfo:req.addressInfo, paymentInfo:req.paymentInfo}] });
+    res.render('admin/index', { data:[{bookingInfo:req.bookingInfo, allPassenger: req.passengerAllInfo, passengerInfo:req.passengerInfo, addressInfo:req.addressInfo, paymentInfo:req.paymentInfo}] });
 });
 
 router.post('/updatebooking/:id', function(req, res, next) {
@@ -150,12 +168,12 @@ router.post('/updatebooking/:id', function(req, res, next) {
     res.redirect('/admin/index/'+req.params.id);
 });
 
-router.post('/updatepassenger/:id', function(req, res, next) {
-    res.redirect('/admin/index/'+req.params.id);
+router.post('/updateguest/:id', function(req, res, next) {
+    res.redirect('/admin/index/'+req.body.bookingId);
 });
 
 router.post('/updatepayment/:id', function(req, res, next) {
-    res.redirect('/admin/index/'+req.params.id);
+    res.redirect('/admin/index/'+req.body.bookingId);
 });
 
 router.post('/updateaddress/:id', function(req, res, next) {
@@ -163,7 +181,18 @@ router.post('/updateaddress/:id', function(req, res, next) {
 });
 
 router.post('/createbooking/', function(req, res, next) {
-    console.log(req);
+    res.redirect('/admin/index/'+req.bookingId);
+});
+
+router.post('/createguest/', function(req, res, next) {
+    res.redirect('/admin/index/'+req.bookingId);
+});
+
+router.post('/createaddress/', function(req, res, next) {
+    res.redirect('/admin/index/'+req.bookingId);
+});
+
+router.post('/createpayment/', function(req, res, next) {
     res.redirect('/admin/index/'+req.bookingId);
 });
 

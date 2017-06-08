@@ -1,0 +1,151 @@
+header {font-weight:800; font-size:170%;}
+div.day {float:left; width:19%; height:70px; font-size:63%; border: 1px solid black; overflow: hidden; position:relative;}
+div.day.fb {height:40px;}
+div.day.available, div.day.fb {padding-top:4%;}
+span.day {display:block; padding:3%;}
+.w3-container.dates.fb {padding:0px 0px 20px 20px; min-height:352px;}
+.w3-container.dates {padding:0px 0px 20px 20px; min-height:565px;}
+.w3-third {margin-bottom: 10px; }
+.booked {background-color: yellow;}
+.available, .availableclosed {background-color: green;}
+.booked_balance, .bookedavailable {background-color: rgb(255,87,34);}
+.closed, .closedbooked, .closedavailable {background-color: orange;}
+.held {background-color: teal;}
+div.day.on {opacity: 0.2;}
+.clear {clear:both;}
+div.key {float: left; width:8%; height:40px; font-size:75%; border: 1px solid black; text-align: center; margin-bottom: 10px;}
+main#about dd {font-weight:normal;}
+main#about dd span {font-weight:bold; width: 20%; display: block; float: left;}
+#map {width: 100%;height: 400px;}
+
+div.day.booked.start:before { 
+  content: '';
+  position: absolute;
+  left: 21%;
+  width: 100%; 
+  height: 240%; 
+  background-color: rgb(255, 255, 255); /* fallback */
+  background-color: rgba(255, 255, 255, 0.7);
+  top: 0;
+  -webkit-transform: rotate(57deg);
+  -moz-transform: rotate(57deg);
+  transform: rotate(57deg);
+}
+
+div.day.closedbooked.start:before { 
+  content: '';
+  position: absolute;
+  left: 21%;
+  width: 100%; 
+  height: 240%; 
+  background-color: rgb(255, 87 ,34); /* fallback */
+  background-color: rgba(255, 87, 34, 0.7);
+  top: 0;
+  -webkit-transform: rotate(57deg);
+  -moz-transform: rotate(57deg);
+  transform: rotate(57deg);
+}
+
+div.day.closedavailable.start:before { 
+  content: '';
+  position: absolute;
+  left: 21%;
+  width: 100%; 
+  height: 240%; 
+  background-color: rgb(0, 128 ,0); /* fallback */
+  background-color: rgba(0, 128, 0, 0.7);
+  top: 0;
+  -webkit-transform: rotate(57deg);
+  -moz-transform: rotate(57deg);
+  transform: rotate(57deg);
+}
+
+div.day.availableclosed.start:before { 
+  content: '';
+  position: absolute;
+  left: 21%;
+  width: 100%; 
+  height: 240%; 
+  background-color: rgb(255, 165 ,0); /* fallback */
+  background-color: rgba(255, 165, 0, 0.7);
+  top: 0;
+  -webkit-transform: rotate(57deg);
+  -moz-transform: rotate(57deg);
+  transform: rotate(57deg);
+}
+
+div.day.bookedavailable.start:before { 
+  content: '';
+  position: absolute;
+  left: 21%;
+  width: 100%; 
+  height: 240%; 
+  background-color: rgb(0, 128 ,0); /* fallback */
+  background-color: rgba(0, 128, 0, 0.7);
+  top: 0;
+  -webkit-transform: rotate(57deg);
+  -moz-transform: rotate(57deg);
+  transform: rotate(57deg);
+}
+
+@media screen and (max-width: 600px) {
+ .w3-container.dates.fb {min-height:auto;}
+ div.key {width:23%;}
+ main#about dd span {width:auto; display:block;float:none;}
+ #map {width: 100%;height: 200px;}
+ main#about dd {margin-left:0px;}
+ #mySidenav {text-align:right;width:30%;margin-top:0px; right:0px;}
+ .w3-sidenav {list-style-type: none;}
+ .w3-sidenav {padding: 0px}
+ .w3-sidenav a {padding-left: 0px; padding-right:8px}
+ div.day.closedbooked.start:before,
+ div.day.closedavailable.start:before,
+ div.day.bookedavailable.start:before {
+  left: 25%;
+  width: 100%; 
+  height: 210%; 	
+ }
+}
+
+@media screen and (max-width: 600px) and (orientation: landscape) {
+ div.day.closedbooked.start:before,
+ div.day.closedavailable.start:before,
+ div.day.bookedavailable.start:before {
+  left: 10%;
+  width: 100%; 
+  height: 350%; 	
+  -webkit-transform: rotate(67deg);
+  -moz-transform: rotate(67deg);
+  transform: rotate(67deg);
+ }
+}
+
+/* #### Tablets Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape){
+ div.day.closedbooked.start:before,
+ div.day.closedavailable.start:before,
+ div.day.bookedavailable.start:before {
+  left: 15%;
+  width: 100%; 
+  height: 215%; 
+  -webkit-transform: rotate(48deg);
+  -moz-transform: rotate(48deg);
+  transform: rotate(48deg);
+}
+}
+
+/* #### Tablets Portrait #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
+ div.day.closedbooked.start:before,
+ div.day.closedavailable.start:before,
+ div.day.bookedavailable.start:before {
+  left: 10%;
+  width: 100%; 
+  height: 290%;  
+  -webkit-transform: rotate(67deg);
+  -moz-transform: rotate(67deg);
+  transform: rotate(67deg);
+ }
+ div.key {width: 20%;}
+
+}

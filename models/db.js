@@ -11,7 +11,8 @@ var self = module.exports = {
             host: config.mysql.host,
             user: config.mysql.username,
             password: config.mysql.password,
-            database: config.mysql.database
+            database: config.mysql.database,
+            multipleStatements: true
         });
         con.connect(function(err){
             if(err){
@@ -20,7 +21,6 @@ var self = module.exports = {
             }
             console.log('Connection established');
         });
-
         switch (args.type) {
             case 'select':
                 self.select(con, args, function(data) {
@@ -36,6 +36,12 @@ var self = module.exports = {
             break;
             case 'update':
                 self.update(con, args, function(data) {
+                    self.end(con);
+                    connectCallback(data);
+                });
+            break;
+            case 'proc':
+            self.proc(con, args, function(data) {
                     self.end(con);
                     connectCallback(data);
                 });
@@ -59,14 +65,37 @@ var self = module.exports = {
     },
     insert: function (con, args, insertCallback) {
         con.query(args.action,function(err,data){
-        if(err) throw err;
-        insertCallback(data);
+            if(err) throw err;
+            insertCallback(data);
         });
     },
     update: function (con, args, updateCallback) {
         con.query(args.action,function(err,data){
-        if(err) throw err;
-        updateCallback(data);
+            if(err) throw err;
+            updateCallback(data);
+        });
+    },
+    proc: function (con, args, updateCallback) {
+        
+        var inParamString = '';
+        var queryString = '';
+
+        for (i=0; i < args.params.length; i++) {
+            inParamString += '?,';
+        }
+        
+        inParamString = inParamString.replace(/,$/,"");
+        
+        if (args.outParams) {
+            queryString = 'CALL '+args.action+'('+inParamString+',@out_param); select @out_param;';
+        }
+        else {
+            queryString = 'CALL '+args.action+'('+inParamString+')';
+        }
+        
+        con.query(queryString, args.params, function(err,data){
+            if(err) throw err;
+            updateCallback(data);
         });
     }
 };

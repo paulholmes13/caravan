@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var availability = require('./routes/availability');
 var gallery = require('./routes/gallery');
 var admin = require('./routes/admin/index');
+var receipt = require('./routes/admin/receipt/index');
 var app = express();
 
 // view engine setup
@@ -32,6 +33,7 @@ app.use('/users', users);
 app.use('/availability', availability);
 app.use('/gallery', gallery);
 app.use('/admin/', admin);
+app.use('/admin/receipt/', receipt);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

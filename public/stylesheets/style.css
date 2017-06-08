@@ -1,12 +1,12 @@
 header {font-weight:800; font-size:170%;}
-div.day {float:left; width:19%; height:70px; font-size:63%; border: 1px solid black; overflow: hidden; position:relative;}
+div.day {float:left; width:14%; height:70px; font-size:63%; border: 1px solid black; overflow: hidden; position:relative;}
 div.day.fb {height:40px;}
 div.day.available, div.day.fb {padding-top:4%;}
 span.day {display:block; padding:3%;}
-.w3-container.dates.fb {padding:0px 0px 20px 20px; min-height:352px;}
+.w3-container.dates.fb {padding:0px 0px 20px 20px; min-height:272px;}
 .w3-container.dates {padding:0px 0px 20px 20px; min-height:565px;}
 .w3-third {margin-bottom: 10px; }
-.booked {background-color: yellow;}
+.booked {background-color: red;}
 .available, .availableclosed {background-color: green;}
 .booked_balance, .bookedavailable {background-color: rgb(255,87,34);}
 .closed, .closedbooked, .closedavailable {background-color: orange;}
@@ -147,5 +147,54 @@ div.day.bookedavailable.start:before {
   transform: rotate(67deg);
  }
  div.key {width: 20%;}
+}
 
+
+#photos {
+  /* Prevent vertical gaps */
+  line-height: 0px;
+   
+  -webkit-column-count: 4;
+  -webkit-column-gap:   1%;
+  -moz-column-count:    4;
+  -moz-column-gap:      1%;
+  column-count:         4;
+  column-gap:           1%;  
+}
+
+#photos img {
+  /* Just in case there are inline attributes */
+  width: 100% !important;
+  height: auto !important;
+  border: 2px solid black;
+  margin: 1% 0%;
+}
+
+@media (max-width: 1200px) {
+  #photos {
+  -moz-column-count:    4;
+  -webkit-column-count: 4;
+  column-count:         4;
+  }
+}
+@media (max-width: 1000px) {
+  #photos {
+  -moz-column-count:    3;
+  -webkit-column-count: 3;
+  column-count:         3;
+  }
+}
+@media (max-width: 800px) {
+  #photos {
+  -moz-column-count:    2;
+  -webkit-column-count: 2;
+  column-count:         2;
+  }
+}
+@media (max-width: 400px) {
+  #photos {
+  -moz-column-count:    1;
+  -webkit-column-count: 1;
+  column-count:         1;
+  }
 }
