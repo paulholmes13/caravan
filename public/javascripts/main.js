@@ -22,11 +22,14 @@ $(function() {
     });
 
     var closedToBooked = [];
+    var closedToPending = [];
     var closedToAvailable = [];
     var availableToBooked = [];
     var availableToClosed = [];
     var bookedToAvailable = [];
     var bookedToClosed = [];
+    var bookedToPending = [];
+    var pendingToClosed = [];
 
 
 
@@ -37,11 +40,23 @@ $(function() {
           closedToBooked.push($(currentElement).next());
         }
       }
+      
+      if ( $(currentElement) && $(currentElement).hasClass('closed') && $(currentElement).next().hasClass('pending') ) {
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
+          closedToPending.push($(currentElement).next());
+        }
+      }
 
       if ( $(currentElement) && $(currentElement).hasClass('closed') && $(currentElement).next().hasClass('available') ) {
         //if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           closedToAvailable.push($(currentElement).next());
         //}
+      }
+
+      if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('pending') ) {
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
+          bookedToPending.push($(currentElement).next());
+        }
       }
 
       if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('closed') ) {
@@ -56,7 +71,6 @@ $(function() {
         }
       }
 
-
       if ( $(currentElement) && $(currentElement).hasClass('available') && $(currentElement).next().hasClass('closed') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           availableToClosed.push($(currentElement).next());
@@ -68,16 +82,29 @@ $(function() {
           bookedToAvailable.push($(currentElement).next());
         }
       }
+      
+      if ( $(currentElement) && $(currentElement).hasClass('pending') && $(currentElement).next().hasClass('closed') ) {
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
+          pendingToClosed.push($(currentElement).next());
+        }
+      }
 
     });
 
     closedToBooked.reverse();
+    closedToPending.reverse();
     bookedToAvailable.reverse();
+    bookedToPending.reverse();
     availableToClosed.reverse();
+    pendingToClosed.reverse();
 
     //loop the arrays and remove _+ add some classes
     $.each(closedToBooked, function(key, element) {
       $(element).removeClass('booked').addClass('closedbooked start');
+    });
+    
+    $.each(closedToPending, function(key, element) {
+      $(element).removeClass('closed').addClass('closedpending start');
     });
 
     $.each(closedToAvailable, function(key, element) {
@@ -86,6 +113,14 @@ $(function() {
 
     $.each(availableToClosed, function(key, element) {
       $(element).removeClass('closed').addClass('availableclosed start');
+    });
+
+    $.each(pendingToClosed, function(key, element) {
+      $(element).removeClass('closed').addClass('pendingclosed start');
+    });
+
+    $.each(bookedToPending, function(key, element) {
+      $(element).removeClass('pending').addClass('bookedpending start');
     });
 
     $.each(bookedToClosed, function(key, element) {
