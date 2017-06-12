@@ -32,7 +32,7 @@ $(function() {
 
     $.each($('div.day'), function(key, currentElement) {
 
-      if ( $(currentElement) && $(currentElement).hasClass('closed') && $(currentElement).next().hasClass('booked_balance') ) {
+      if ( $(currentElement) && $(currentElement).hasClass('closed') && $(currentElement).next().hasClass('booked') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           closedToBooked.push($(currentElement).next());
         }
@@ -44,13 +44,13 @@ $(function() {
         //}
       }
 
-      if ( $(currentElement) && $(currentElement).hasClass('booked_balance') && $(currentElement).next().hasClass('closed') ) {
+      if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('closed') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           bookedToClosed.push($(currentElement).next());
         }
       }
 
-      if ( $(currentElement) && $(currentElement).hasClass('available') && $(currentElement).next().hasClass('booked_balance') ) {
+      if ( $(currentElement) && $(currentElement).hasClass('available') && $(currentElement).next().hasClass('booked') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           availableToBooked.push($(currentElement).next());
         }
@@ -63,7 +63,7 @@ $(function() {
         }
       }
 
-      if ( $(currentElement) && $(currentElement).hasClass('booked_balance') && $(currentElement).next().hasClass('available') ) {
+      if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('available') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           bookedToAvailable.push($(currentElement).next());
         }
@@ -93,7 +93,7 @@ $(function() {
     });
 
     $.each(availableToBooked, function(key, element) {
-      //$(element).removeClass('booked').addClass('availablebooked start');
+      $(element).removeClass('booked').addClass('availablebooked start');
     });
 
     $.each(bookedToAvailable, function(key, element) {
