@@ -35,9 +35,6 @@ router.use('/index/:id', function(req, res, next) {
                                 var d = new Date(result[0]['payment_date']);
                                 result[0]['payment_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
                             }
-                            else {
-                                next();
-                            }
 
                             req.paymentInfo = (result && result.length) ? result : {};
                             
