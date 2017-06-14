@@ -37,7 +37,7 @@ router.use('/index/:id', function(req, res, next) {
                             if ( result && result.length ) {
                                 for (var i=0; i < result.length; i++) {
                                     var d = new Date(result[i]['payment_date']);
-                                    result[i]['payment_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
+                                    result[i]['payment_date'] = d.getDate() + '-' + (d.getMonth()+1) +  '-' + d.getFullYear();
                                     balance = balance - result[i]['amount'];
                                     result[i]['balance'] = balance;
                                 }
