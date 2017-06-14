@@ -13,7 +13,7 @@ router.use('/index/:id', function(req, res, next) {
                 var leadP = result[0]['lead_passenger_id'];
                 result[0]['arrival_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
                 result[0]['arrival_date_display'] = d.getDate() + '-' + (d.getMonth()+1) +  '-' + d.getFullYear();
-
+                
                 req.bookingInfo = result;
                 
                 booking.getAllPassengers({bookingId:req.params.id}, function(result) {
@@ -31,13 +31,20 @@ router.use('/index/:id', function(req, res, next) {
                         req.passengerInfo = (result && result.length) ? result[0] : {};
 
                         booking.getPayments({bookingId:req.params.id}, function(result) {
+                            var holidayCost  = req.bookingInfo[0].cost;
+                            var balance = holidayCost;
+                            
                             if ( result && result.length ) {
-                                var d = new Date(result[0]['payment_date']);
-                                result[0]['payment_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
+                                for (var i=0; i < result.length; i++) {
+                                    var d = new Date(result[i]['payment_date']);
+                                    result[i]['payment_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
+                                    balance = balance - result[i]['amount'];
+                                    result[i]['balance'] = balance;
+                                }
                             }
 
                             req.paymentInfo = (result && result.length) ? result : {};
-                            
+                            console.log(req.paymentInfo);                            
                             if (leadP != null) {
                                 booking.getAddress({customerId:leadP}, function(result) {
                                     req.addressInfo = (result && result.length) ? result : {};
@@ -63,7 +70,7 @@ router.use('/index/:id', function(req, res, next) {
 
 /* availability page */
 router.get('/index/:id', function(req, res, next) {
-    console.log('bookingInfo: ' + req);
+    //console.log(req.paymentInfo);
     res.render('admin/receipt/index', { data:[{bookingInfo:req.bookingInfo, allPassenger: req.passengerAllInfo, passengerInfo:req.passengerInfo, addressInfo:req.addressInfo, paymentInfo:req.paymentInfo}] });
 });
 

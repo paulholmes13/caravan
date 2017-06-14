@@ -71,17 +71,19 @@
     <div class="payments">
         <h3>Payments</h3>
         {{#paymentInfo}}
-            {{#amount}}<span class='small'>{{payment_date}}</span><span class='small'>Type: {{type}}</span><span class='medium'>Amount: &pound;{{amount}}</span><span>Ref: {{reference}}</span><span>Balance: &pound;{{balance}}</span></br >{{/amount}}
+            {{#amount}}
+                <span class='small'>{{payment_date}}</span><span class='small'>Type: {{type}}</span><span class='medium'>Amount: &pound;{{amount}}</span><span>Ref: {{reference}}</span><span>Balance: &pound;{{balance}}</span></br >
+            {{/amount}}
             {{^amount}}
                 <p>Please could you let us have the deposit in the sum of £75.00 as soon as possible.</p>
             {{/amount}}
-            <p>
-            BACS Information:<br />
-            Account Name: Mr P and Mrs C Holmes<br />
-            Account Number: 00823812<br />
-            Account Sort Code: 110717<br />
-            </p>
         {{/paymentInfo}}
+        <p>
+        BACS Information:<br />
+        Account Name: Mr P and Mrs C Holmes<br />
+        Account Number: 00823812<br />
+        Account Sort Code: 110717<br />
+        </p>
     </div>
 
     <hr />
