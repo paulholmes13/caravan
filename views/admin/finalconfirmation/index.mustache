@@ -1,0 +1,88 @@
+{{#data}}
+{{^bookingInfo}}
+<h1>No Booking Found</h1>
+{{/bookingInfo}}
+{{#bookingInfo}}
+{{>partials/headerAdmin}}
+<body class="test">
+    <div class="w3-container">
+
+        <div class="header_img">
+            <img class="overlay" src="/images/delta_lounge.jpeg" />
+            <p><a href="https://www.facebook.com/paulandclairesholidayhome/">https://www.facebook.com/paulandclairesholidayhome/</a></p>
+        </div>
+
+        <div class="title">
+            <h1 class="wording">Booking Confirmation - Reference: DELTA {{#bookingInfo}}{{booking_id}}{{/bookingInfo}} </h1>
+            <div class="vanaddress">
+            <p>
+            47 Meadows <br/>
+            Haven Holiday Park<br/>
+            LittleSea<br/>
+            DT4 9DT
+            </p>
+            <p><a href="tel:07787684268">Tel: 07787 684268</a></p>
+        </div>
+    </div>
+
+    <hr />
+
+    <p>Dear {{#passengerInfo.0}}{{#title}}{{title}} {{/title}}{{first_name}} {{last_name}}{{/passengerInfo.0}},</p>
+
+    <p>Once again we would like to thank you for your booking and we do hope you and your guests enjoy the caravan itself as well as Haven Littlesea.  <b>Check-in is available at 3pm and your must have vacated the caravan by 10am on the day of departure to allow for the cleaners.</b></p>
+    <p>Please take this letter as proof of booking as you may be asked by security on entering the park for some identification/confirmation.</p>
+    <p>On entering the park follow the sign posts for "Meadows".  The easiest way after entering the park is to take the 2nd turning on the right, this is about 1000 yards once in the park, follow this road to the top and our caravan is directly in front of you.</p>
+    <p><b>You will find next to the front door (bottom left) a keysafe.  The code for this is <u>1306</u>.  Please make sure the key is returned here and the code mixed up when departing.</b></p>
+    <p>Please do not hesitate to contact us via Facebook or Phone should you have any problem or questions.</p>
+    
+    <hr />
+
+    <div class="conditions">
+        <h4>Conditions</h4>
+        <p>
+            A deposit of &pound;75 is required.<br />
+            The deposit will be refunded according to the cancellation conditions.<br />
+            Full booking balance must be paid 14 days before arrival.<br />
+            Payments by cash or BACS<br />
+            Your expected arrival time is 15:00.<br />
+        </p>
+    </div>
+
+    <div class="cancellation">
+        <h4>Cancellations</h4>
+        <p>
+        If the booking is cancelled then a charge equal to &pound;75 per booking will be made.<br />
+        In the event of a no show or booking reduction (after arrival date) the full cost of the booking is charged.<br />
+        </p>
+    </div>
+
+    <hr />
+
+    <div class="cleaning">
+        <p>
+        Firstly, we would like to wish you a happy holiday and we hope you enjoy the park and caravan alike.
+
+        As this caravan is PRIVATELY owned please:
+
+        1) Leave the caravan as you first find it.  Prior to your stay the caravan has been thoroughly cleaned. Please check the caravan when you arrive and report any issues immediately taking photos if necessary.
+
+        2) We have supplied a number of cleaning products.  Please use them if needed and please replace should you use the last of an item.  There is a grocery store located by the main complex.
+        
+        3) Prior to leaving the caravan please ensure that all kitchen equipment is clean and back in place, ensuring that all kitchen surfaces and caravan tables have been wiped clean, bins have been emptied and the floors have been hoovered and left tidy.
+
+        4) The caravan should be left in the state you found it.  Any additional cleaning by Haven will impose further costs to us and we won’t be able to keep our prices at what we think are a reasonable rate.
+
+        5) Please do not remove any property from the caravan.  This is our property NOT Havens.  Please report any breakages, we understand accidents happen.
+
+        6) All doors and windows must be closed when you leave the caravan. 
+
+        7) This is a strictly no smoking caravan.
+
+        The cleaners will take photographs of anything they find.</p>
+    </div>
+    
+    <p>Many thanks.</p>
+    <p>Paul and Claire</p>
+{{/bookingInfo}}
+{{/data}}
+
