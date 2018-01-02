@@ -13,7 +13,7 @@ router.use(function(req, res, next) {
 
 /* availability page */
 router.get('/', function(req, res) {
-        res.render('availability', {data: req.dataSet, fbHeight: '1300px'});
+        res.render('availability', {data: req.dataSet, fbHeight: '1210px'});
 });
 
 module.exports = router;

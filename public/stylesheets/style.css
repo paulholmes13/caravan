@@ -3,7 +3,7 @@ div.day {float:left; width:45px; height:45px; font-size:63%; border: 1px solid b
 div.day.fb {height:45px;}
 div.day.available, div.day.fb {padding-top:4%;}
 span.day {display:block; padding:3%;}
-.w3-container.dates.fb {padding:0px 0px 20px 20px; min-height:272px;}
+.w3-container.dates.fb {padding:0px 0px 20px 20px; min-height:345px;}
 .w3-container.dates {padding:0px 0px 20px 20px; min-height:565px;}
 .w3-third {margin-bottom: 10px; }
 .booked {background-color: rgb(255,87,34);}
@@ -17,6 +17,8 @@ div.key {float: left; width:8%; height:40px; font-size:75%; border: 1px solid bl
 main#about dd {font-weight:normal;}
 main#about dd span {font-weight:bold; width: 20%; display: block; float: left;}
 #map {width: 100%;height: 400px;}
+#facebookContainer div {overflow:hidden}
+.w3-padding-top-16 {padding-top:16px}
 
 div.day.booked.start:before { 
   content: '';
@@ -142,9 +144,24 @@ div.day.availablebooked.start:before {
  .w3-sidenav a {padding-left: 0px; padding-right:8px}
 }
 
+@media screen and (orientation:landscape) {
+ /* Landscape styles here */
+ div.key {width: 20%;}
+ .w3-container.dates.fb {min-height:auto}
+}
+
 /* #### Tablets Portrait #### */
 @media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
  div.key {width: 20%;}
+ .w3-container.dates.fb {min-height:auto}
+ #facebookContainer {display:none}
+}
+/* #### Tablets Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape){
+ .w3-container.dates.fb {min-height:430px}
+ .w3-col.l9 {width:100% !important;}
+ #facebookContainer {display:none}
+ footer.w3-hide-large {display:block !important;}
 }
 
 

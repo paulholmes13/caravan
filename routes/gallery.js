@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
                 imageLoop.push({'image': '//localhost:3000/images/caravan/' + file});
             });
 
-            res.render('gallery', {imageArray: imageLoop, fbHeight: '2000px'});
+            res.render('gallery', {imageArray: imageLoop, fbHeight: '2248px'});
     } );
 });
 
