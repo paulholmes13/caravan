@@ -97,9 +97,9 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
       }
 
       if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('available') ) {
-        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
-          bookedToAvailable.push($(currentElement).next());
-        }
+        //if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
+          bookedToAvailable.push($(currentElement));
+        //}
       }
       
       if ( $(currentElement) && $(currentElement).hasClass('pending') && $(currentElement).next().hasClass('closed') ) {
@@ -112,6 +112,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
     closedToBooked.reverse();
     closedToPending.reverse();
+    closedToAvailable.reverse();
     bookedToAvailable.reverse();
     bookedToPending.reverse();
     availableToClosed.reverse();
@@ -142,6 +143,10 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
       $(element).removeClass('pending').addClass('bookedpending start');
     });
 
+    $.each(bookedToAvailable, function(key, element) {
+      $(element).removeClass('booked').addClass('bookedavailable start');
+    });
+    
     $.each(bookedToClosed, function(key, element) {
       //$(element).removeClass('closed').addClass('bookedclosed start');
     });
