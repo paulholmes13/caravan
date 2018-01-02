@@ -67,9 +67,9 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
       }
 
       if ( $(currentElement) && $(currentElement).hasClass('closed') && $(currentElement).next().hasClass('available') ) {
-        //if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
-          closedToAvailable.push($(currentElement).next());
-        //}
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Tue|Fri/)) {
+          ( $(currentElement).next().find('span').html().match(/Tue/) ) ? closedToAvailable.push($(currentElement)) : closedToAvailable.push($(currentElement).next());
+        }
       }
 
       if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('pending') ) {
@@ -97,11 +97,11 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
       }
 
       if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('available') ) {
-        //if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
-          bookedToAvailable.push($(currentElement));
-        //}
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Tue|Fri/)) {
+          ( $(currentElement).next().find('span').html().match(/Tue/) ) ? bookedToAvailable.push($(currentElement)) : bookedToAvailable.push($(currentElement).next());
+        }
       }
-      
+
       if ( $(currentElement) && $(currentElement).hasClass('pending') && $(currentElement).next().hasClass('closed') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           pendingToClosed.push($(currentElement).next());
