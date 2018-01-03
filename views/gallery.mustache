@@ -3,16 +3,17 @@
 {{>partials/cover}}
 {{>partials/navigation}}
 <div class="w3-row">
-    <section class="w3-col l9 m12 w3-padding">
+    <div id="leftBody" class="w3-col l9 m12 w3-padding">
         <div class="w3-border w3-round-xlarge w3-padding">
-        	<div class="clear"></div>
-			<div id="photos">
+            <h6 class="w3-small-hide w3-medium-hide">Simply click on an image below for a closer look</h6>
+            <div class="clear"></div>
+            <div id="photos">
             {{#imageArray}}
-            	<img src="{{image}}" alt=""/>
-        	{{/imageArray}}
-        	</div>
-		</div>
-    </section>
+                <img src="{{image}}" alt=""/>
+            {{/imageArray}}
+            </div>
+        </div>
+    </div>
     {{>partials/facebookStream}}
 </div>
 {{>partials/footer}}
