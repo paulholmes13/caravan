@@ -56,10 +56,12 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     var closedToAvailable = [];
     var availableToBooked = [];
     var availableToClosed = [];
+    var availableToPending = [];
     var bookedToAvailable = [];
     var bookedToClosed = [];
     var bookedToPending = [];
     var pendingToClosed = [];
+    var pendingToAvailable = [];
 
     $.each($('div.day'), function(key, currentElement) {
 
@@ -76,7 +78,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
       }
 
       if ( $(currentElement) && $(currentElement).hasClass('closed') && $(currentElement).next().hasClass('available') ) {
-        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Tue|Fri/)) {
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           ( $(currentElement).next().find('span').html().match(/Tue/) ) ? closedToAvailable.push($(currentElement)) : closedToAvailable.push($(currentElement).next());
         }
       }
@@ -93,6 +95,12 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
         }
       }
 
+      if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('available') ) {
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
+          ( $(currentElement).next().find('span').html().match(/Tue/) ) ? bookedToAvailable.push($(currentElement)) : bookedToAvailable.push($(currentElement).next());
+        }
+      }
+      
       if ( $(currentElement) && $(currentElement).hasClass('available') && $(currentElement).next().hasClass('booked') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
           availableToBooked.push($(currentElement).next());
@@ -105,11 +113,12 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
         }
       }
 
-      if ( $(currentElement) && $(currentElement).hasClass('booked') && $(currentElement).next().hasClass('available') ) {
-        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Tue|Fri/)) {
-          ( $(currentElement).next().find('span').html().match(/Tue/) ) ? bookedToAvailable.push($(currentElement)) : bookedToAvailable.push($(currentElement).next());
+      if ( $(currentElement) && $(currentElement).hasClass('available') && $(currentElement).next().hasClass('pending') ) {
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
+          availableToPending.push($(currentElement).next());
         }
       }
+
 
       if ( $(currentElement) && $(currentElement).hasClass('pending') && $(currentElement).next().hasClass('closed') ) {
         if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
@@ -117,6 +126,11 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
         }
       }
 
+      if ( $(currentElement) && $(currentElement).hasClass('pending') && $(currentElement).next().hasClass('available') ) {
+        if ( $(currentElement) && $(currentElement).next().find('span').html().match(/Mon|Fri/)) {
+          pendingToAvailable.push($(currentElement).next());
+        }
+      }
     });
 
     closedToBooked.reverse();
@@ -125,7 +139,9 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     bookedToAvailable.reverse();
     bookedToPending.reverse();
     availableToClosed.reverse();
+    availableToPending.reverse();
     pendingToClosed.reverse();
+    pendingToAvailable.reverse();
 
     //loop the arrays and remove _+ add some classes
     $.each(closedToBooked, function(key, element) {
@@ -168,6 +184,13 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
       $(element).removeClass('available').addClass('bookedavailable start');
     });
 
+    $.each(pendingToAvailable, function(key, element) {
+      $(element).removeClass('available').addClass('pendingavailable start');
+    });
+    
+    $.each(availableToPending, function(key, element) {
+      $(element).removeClass('pending').addClass('availablepending start');
+    });
 
     //if ( $('div.day.closed').next().hasClass('booked')
 

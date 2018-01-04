@@ -7,10 +7,10 @@ span.day {display:block; padding:3%;}
 .w3-container.dates {padding:0px 0px 20px 20px; min-height:565px;}
 .w3-third {margin-bottom: 10px; }
 .booked {background-color: rgb(255,87,34);}
-.available, .availableclosed, .availablebooked {background-color: green;}
+.available, .availableclosed, .availablebooked, .availablepending {background-color: green;}
 .booked_balance, .bookedavailable, .bookedpending {background-color: rgb(255,87,34);}
 .closed, .closedbooked, .closedavailable {background-color: orange;}
-.held, .pending, .pendingclosed {background-color: teal;}
+.held, .pending, .pendingclosed, .pendingavailable {background-color: teal;}
 div.day.on {opacity: 0.2;}
 .clear {clear:both;}
 div.key {float: left; width:8%; height:40px; font-size:75%; border: 1px solid black; text-align: center; margin-bottom: 10px;}
@@ -78,6 +78,20 @@ div.day.availableclosed.start:before {
   transform: rotate(45deg);
 }
 
+div.day.availablepending.start:before { 
+  content: '';
+  position: absolute;
+  left: 0%;
+  width: 100%; 
+  height: 240%; 
+  background-color: rgb(0, 128 ,128); /* fallback */
+  background-color: rgba(0, 128, 128, 0.7);
+  top: 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
 div.day.pendingclosed.start:before { 
   content: '';
   position: absolute;
@@ -86,6 +100,20 @@ div.day.pendingclosed.start:before {
   height: 240%; 
   background-color: rgb(255, 165 ,0); /* fallback */
   background-color: rgba(255, 165, 0, 0.7);
+  top: 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+div.day.pendingavailable.start:before { 
+  content: '';
+  position: absolute;
+  left: 0%;
+  width: 100%; 
+  height: 240%; 
+  background-color: rgb(0, 128 ,0); /* fallback */
+  background-color: rgba(0, 128, 0, 0.7);
   top: 0;
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
