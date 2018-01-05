@@ -8,7 +8,9 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     var defaultsettings = { 
                             '/availability' : { "height" : "16"}
                           };
-    
+    var modal = $('#myModal');
+
+
     if ( !isMobile && $(mainSection).height() > 400 ) {
         minuscalc = (location.pathname in defaultsettings) ? defaultsettings[location.pathname].height : 0;
         $('div#facebookContainer').find('div').css('height',(Math.round($(mainSection).height() - minuscalc)));
@@ -44,6 +46,24 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
             }
         });
     }
+
+
+    if ( !isMobile ) {
+        $('#photos img').click( function(event) {
+            if ( typeof modal === "object" ) {
+                $(modal).css('display', 'block');
+                var imgEle = $(modal).find('img');
+                $(imgEle).attr('src',this.src);
+
+                var span = document.getElementsByClassName("close")[0];
+
+                $('#myModal span').click(function() { 
+                    $(modal).css('display', 'none');
+                });
+            };
+        });
+    }
+
 
     //resize FB plugin
     $( window ).resize(function() {
