@@ -101,6 +101,11 @@ var self = module.exports = {
         db.connect({type:'proc', action:'create_guest', params:args.inParams}, function(result) {
             callback(result);
         });
+    },
+    setAddress: function(args, callback) {
+        db.connect({type:'proc', action:'create_address', params:args.inParams}, function(result) {
+            callback(result);
+        });
     }
 
 };

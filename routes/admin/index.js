@@ -123,8 +123,11 @@ router.use('/createaddress/', function(req, res, next) {
 
 
 router.use('/updateaddress/:id', function(req, res, next) {
-    if (req.params.id) {
-        next();
+    if (req.body.bookingId) {
+        var params = [req.body.addressId, req.body.customerId, req.body.address_type, req.body.address_1, req.body.address_2, req.body.address_3, req.body.address_4, req.body.postal_code, req.body.phone];
+        booking.setAddress({inParams:params}, function(result) {
+            next();
+        });
     }
 });
 

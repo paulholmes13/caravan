@@ -288,11 +288,10 @@ DECLARE nextId INT;
   ELSEIF ( addressId IS NOT NULL ) THEN 
 
     SET @query = "UPDATE addresses SET address_1='@address_1', address_2='@address_2', address_3='@address_3', address_4='@address_4', postal_code='@postal_code', phone='@phone' WHERE address_id=@addressId";
-    SET @query = replace(@query, '@address_1', address_1);
-    SET @query = replace(@query, '@address_2', address_2);
-    SET @query = replace(@query, '@address_3', address_3);
-    SET @query = replace(@query, '@address_4', address_4);
-    SET @query = replace(@query, '@emailAddress', emailAddress);
+    SET @query = replace(@query, '@address_1', address1);
+    SET @query = replace(@query, '@address_2', address2);
+    SET @query = replace(@query, '@address_3', address3);
+    SET @query = replace(@query, '@address_4', address4);
     SET @query = replace(@query, '@postal_code', postCode);
     SET @query = replace(@query, '@phone', phone);
     SET @query = replace(@query, '@addressId', addressId);
