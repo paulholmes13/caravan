@@ -28,12 +28,19 @@ router.use('/index/:id', function(req, res, next) {
                 result[0]['arrival_date'] = d.getFullYear() + '-' + (d.getMonth()+1) +  '-' + d.getDate();
 
                 req.bookingInfo = result;
-                
+
                 booking.getAllPassengers({bookingId:req.params.id}, function(result) {
                     req.passengerAllInfo = result;
 
                     booking.getPassengers({bookingId:req.params.id}, function(result) {
+
                         req.passengerInfo = result[0];
+
+                        if ( req.passengerInfo && req.passengerInfo.length) {
+                            for ( i=0; req.passengerInfo.length > i; i++ ) {
+                                req.passengerInfo[i]['lead_passenger'] = (req.passengerInfo[i]['customer_id'] == leadP) ? 1 : 0;
+                            }
+                        }
 
                         booking.getPayments({bookingId:req.params.id}, function(result) {
                             if ( result && result.length ) {
@@ -42,7 +49,7 @@ router.use('/index/:id', function(req, res, next) {
                             }
 
                             req.paymentInfo = result;
-                            
+
                             booking.getAddress({customerId:leadP}, function(result) {
                                 req.addressInfo = result;
                                 next();
@@ -51,12 +58,14 @@ router.use('/index/:id', function(req, res, next) {
                     });
                 });
             }
-            req.bookingInfo = {};
-            req.passengerAllInfo = {};
-            req.passengerInfo = {};
-            req.paymentInfo = {};
-            req.addressInfo = {};
-            next();
+            else {
+                req.bookingInfo = {};
+                req.passengerAllInfo = {};
+                req.passengerInfo = {};
+                req.paymentInfo = {};
+                req.addressInfo = {};
+                next();
+            }
         });
     }
 });
@@ -67,7 +76,7 @@ router.use('/createbooking/', function(req, res, next) {
 
     booking.setBooking({inParams:params}, function(result) {
         req.bookingId = result[2][0]['@out_param'];
-        next(); 
+        next();
     });
 });
 
@@ -75,7 +84,7 @@ router.use('/updatebooking/:id', function(req, res, next) {
     if (req.params.id) {
         var params = [req.body.arrivalDate, req.body.numberOfNights, req.body.cost, req.body.privPass, req.body.bookingId];
         booking.setBooking({inParams:params}, function(result) {
-            next(); 
+            next();
         });
     }
 });
@@ -86,7 +95,7 @@ router.use('/createguest/', function(req, res, next) {
     var params = [req.body.bookingId, existingId, null, req.body.title, req.body.firstName, req.body.lastName, req.body.emailAddress, age, req.body.leadPassenger];
     booking.setGuest({inParams:params}, function(result) {
         req.bookingId = req.body.bookingId;
-        next(); 
+        next();
     });
 });
 
@@ -96,7 +105,7 @@ router.use('/updateguest/:id', function(req, res, next) {
         var existingId = (typeof req.body.existingCustomerId === 'undefined' || req.body.existingCustomerId == '') ? null : req.body.existingCustomerId;
         var params = [req.body.bookingId, existingId, req.body.customer_id, req.body.title, req.body.firstName, req.body.lastName, req.body.emailAddress, age, req.body.leadPassenger];
         booking.setGuest({inParams:params}, function(result) {
-            next(); 
+            next();
         });
     }
 });
@@ -115,7 +124,6 @@ router.use('/createaddress/', function(req, res, next) {
 
 router.use('/updateaddress/:id', function(req, res, next) {
     if (req.params.id) {
-        console.log('Hello');
         next();
     }
 });
@@ -164,7 +172,6 @@ router.get('/index/:id', function(req, res, next) {
 });
 
 router.post('/updatebooking/:id', function(req, res, next) {
-    console.log('Goodbye');
     res.redirect('/admin/index/'+req.params.id);
 });
 
@@ -177,7 +184,7 @@ router.post('/updatepayment/:id', function(req, res, next) {
 });
 
 router.post('/updateaddress/:id', function(req, res, next) {
-    res.redirect('/admin/index/'+req.params.id);
+    res.redirect('/admin/index/'+req.body.bookingId);
 });
 
 router.post('/createbooking/', function(req, res, next) {

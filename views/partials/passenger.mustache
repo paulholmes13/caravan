@@ -23,7 +23,12 @@
     <label for="">Last Name</label><input type="text" name="lastName" value="{{last_name}}">
     {{#age}}<label for="">Age</label><input type="text" name="age" value="{{age}}" maxlength="2" size="2">{{/age}}
     <label for="">email</label><input type="text" name="emailAddress" value="{{email_address}}">
-    <input type="hidden" name="leadPassenger" value="{{#lead_passenger}}{{lead_passenger}}{{/lead_passenger}}{{^lead_passenger}}1{{/lead_passenger}}">
+    {{#passengerInfo.length}}
+        <input type="hidden" name="leadPassenger" value="{{#lead_passenger}}{{lead_passenger}}{{/lead_passenger}}{{^lead_passenger}}0{{/lead_passenger}}">
+    {{/passengerInfo.length}}
+    {{^passengerInfo.length}}
+        <input type="hidden" name="leadPassenger" value="1">
+    {{/passengerInfo.length}}
     <input type="submit" value="{{#customer_id}}Update{{/customer_id}}{{^customer_id}}Create{{/customer_id}} Passenger">
 </form>
 

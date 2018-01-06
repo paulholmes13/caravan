@@ -32,9 +32,8 @@
                 {{#passengerInfo}}
                     {{>partials/passenger}}
                 {{/passengerInfo}}
-                {{^passengerInfo}}
-                    {{>partials/passenger}}
-                {{/passengerInfo}}
+
+                {{>partials/passenger}}
             </div>
             <div class="w3-panel w3-border w3-round-xlarge w3-padding w3-margin-top">
                 <h3>Booking Address:</h3>
@@ -42,7 +41,7 @@
                     {{#addressInfo}}
                         <input type="hidden" name="bookingId" value="{{#bookingInfo}}{{booking_id}}{{/bookingInfo}}">
                         <input type="hidden" name="addressId" value="{{address_id}}">
-                        <input type="hidden" name="customerId" value="{{#passengerInfo}}{{customer_id}}{{/passengerInfo}}">
+                        <input type="hidden" name="customerId" value="{{#bookingInfo}}{{lead_passenger_id}}{{/bookingInfo}}">
                         
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address Type</label><input type="text" name="address_type" value="B"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address1</label><input type="text" name="address_1" value="{{address_1}}"></div>
@@ -56,7 +55,7 @@
                     {{^addressInfo}}
                         <input type="hidden" name="bookingId" value="{{#bookingInfo}}{{booking_id}}{{/bookingInfo}}">
                         <input type="hidden" name="addressId" value="{{address_id}}">
-                        <input type="hidden" name="customerId" value="{{#passengerInfo}}{{customer_id}}{{/passengerInfo}}">
+                        <input type="hidden" name="customerId" value="{{#bookingInfo}}{{lead_passenger_id}}{{/bookingInfo}}">
                         
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address Type</label><input type="text" name="address_type" value="B"></div>
                         <div class="inputSpace margin2pxTopBottom"><label for="">Address1</label><input type="text" name="address_1" value="{{address_1}}"></div>

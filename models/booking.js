@@ -30,23 +30,27 @@ var self = module.exports = {
     },
     getPayments: function(args, callback) {
         db.connect({type:'select', action:'SELECT * FROM payments where booking_id = ' + args.bookingId}, function(result) {
-            //if (typeof result != 'undefined' && result.length) {
+            if (typeof result != 'undefined') {
+                callback(result);
+            }
+            else {
+                callback({});
+            }
+        });
+    },
+    getAddress: function(args, callback) {
+        if (args && args.customerId) {
+            db.connect({type:'select', action:'SELECT * FROM addresses where customer_id = ' + args.customerId}, function(result) {
                 if (typeof result != 'undefined') {
                     callback(result);
                 }
                 else {
                     callback({});
                 }
-            //}
-        });
-    },
-    getAddress: function(args, callback) {
-        if (args && args.customerId) {
-            db.connect({type:'select', action:'SELECT * FROM addresses where customer_id = ' + args.customerId}, function(result) {
-                //if (typeof result != 'undefined' && result.length) {
-                    callback(result);
-                //}
             });
+        }
+        else {
+            callback({});
         }
     },
     getAvailability: function(args, callback) {
