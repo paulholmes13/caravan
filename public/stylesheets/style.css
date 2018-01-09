@@ -244,6 +244,11 @@ div.day.availablebooked.start:before {
   }
 }
 
+@media (max-width: 1367px) and (min-width: 1365px) {
+    .w3-container.dates.fb {
+        min-height:340px
+    }
+}
 
 /* Style the Image Used to Trigger the Modal */
 #myImg {
