@@ -63,6 +63,7 @@ var self = module.exports = {
                 var oldMonth;
                 var firstDayInMonth = 0;
                 var lastDayInMonth;
+                var monthCount = 0;
 
                 for (var i=0; i<result.length; i++) {
 
@@ -70,6 +71,7 @@ var self = module.exports = {
                         oldMonth = monthNames[result[i]["arrival_date"].getMonth()];
                         firstDayInMonth = 1;
                         lastDayInMonth = new Date(result[i]["arrival_date"].getFullYear(), result[i]["arrival_date"].getMonth() + 1, 0).getDate();
+                        monthCount++;
                     }
                     else {
                         firstDayInMonth = 0;
@@ -83,6 +85,7 @@ var self = module.exports = {
                         pending:(result[i].status == 'P') ? 1:0, 
                         booked: (result[i].status == 'B') ? 1:0,
                         closed: (result[i].status == 'C') ? 1:0,
+                        newRow: (firstDayInMonth && (monthCount==4||monthCount==7||monthCount==10)) ? 1 : 0,
                         firstDayInMonth: firstDayInMonth,
                         lastDayInMonth: (result[i]["arrival_date"].getDate() == lastDayInMonth) ? 1:0
                     };
