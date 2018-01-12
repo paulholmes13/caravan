@@ -19,19 +19,6 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     }
 
     if ( isMobile ) {
-        $('.readmore').on('click', function(){
-            if ( $('.w3-hide-small').is(':hidden') ) {
-                this.innerHTML = 'Read Less'
-                $('.w3-hide-small').fadeIn('slow').attr('style', 'display: block !important');
-                $("html, body").animate({scrollTop: $('#anchor').offset().top }, 2000);
-            }
-            else {
-                this.innerHTML = 'Read More';
-                $('.w3-hide-small').fadeOut('slow').removeAttr('style');
-                $("html, body").animate({scrollTop: $('body').offset().top }, 2000);
-            }
-        });
-
         $('.w3-opennav').on('click', function(){
             if ( $('#mySidenav').is(':hidden') ) {
                 
