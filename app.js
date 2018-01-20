@@ -13,6 +13,8 @@ var gallery = require('./routes/gallery');
 var admin = require('./routes/admin/index');
 var receipt = require('./routes/admin/receipt/index');
 var confirmation = require('./routes/admin/finalconfirmation/index');
+var compress = require('./routes/admin/tools/compress');
+
 var app = express();
 
 // view engine setup
@@ -36,6 +38,7 @@ app.use('/gallery', gallery);
 app.use('/admin/', admin);
 app.use('/admin/receipt/', receipt);
 app.use('/admin/finalconfirmation/', confirmation);
+app.use('/admin/tools/compress', compress);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
