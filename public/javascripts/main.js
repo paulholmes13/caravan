@@ -159,6 +159,7 @@ $(window).on("load", function() {
     closedToAvailable.reverse();
     bookedToAvailable.reverse();
     bookedToPending.reverse();
+    bookedToClosed.reverse();
     availableToClosed.reverse();
     availableToPending.reverse();
     pendingToClosed.reverse();
@@ -194,7 +195,7 @@ $(window).on("load", function() {
     });
     
     $.each(bookedToClosed, function(key, element) {
-      //$(element).removeClass('closed').addClass('bookedclosed start');
+      $(element).removeClass('closed').addClass('bookedclosed start');
     });
 
     $.each(availableToBooked, function(key, element) {
